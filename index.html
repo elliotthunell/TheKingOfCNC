@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The CNC God</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Trebuchet MS', sans-serif;
+      background: #0a0a0a;
+      color: #e6e6e6;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(90deg, #111, #222);
+      color: #f4d03f;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px #ff0000, 0 0 25px #ff3333;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: #f4d03f;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff3333;
+      text-shadow: 0 0 10px #ff3333, 0 0 20px #ff0000;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986') no-repeat center center/cover;
+      min-height: 90vh;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #f4d03f;
+      text-shadow: 0 0 15px black, 0 0 25px #000;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin: 0;
+      z-index: 1;
+      position: relative;
+      animation: glow 2s infinite alternate;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-top: 15px;
+      z-index: 1;
+      position: relative;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #f4d03f;
+      text-shadow: 0 0 10px #ff0000;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background: #111;
+      color: #888;
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      margin-top: 50px;
+      border-top: 2px solid #222;
+    }
+
+    /* Glow animation */
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333; }
+      to { text-shadow: 0 0 20px #ff0000, 0 0 40px #ff3333; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.2rem; }
+      .about-container { flex-direction: column; text-align: center; }
+    }
+
+    .epic-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 40px 80px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+      background: #c42323;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #ff0000, 0 0 50px #ff3333;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+
+    .epic-btn:hover {
+      background: #ff3333;
+      box-shadow: 0 0 40px #ff0000, 0 0 80px #ff3333;
+      transform: scale(1.1);
+    }
+
+    /* Side sticky blocks */
+    .side-block {
+      position: fixed;
+      top: 30%;
+      width: 12vw;
+      max-width: 160px;
+      min-width: 80px;
+      text-align: center;
+      z-index: 2000;
+      font-family: 'Arial Black', sans-serif;
+    }
+
+    .left-side { left: 1vw; }
+    .right-side { right: 1vw; }
+
+    .side-block img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 2px solid #f4d03f;
+      box-shadow: 0 0 15px #ff0000;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .side-block img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #ff0000, 0 0 45px #ff3333;
+    }
+
+    .side-block a {
+      display: block;
+      margin-top: 5px;
+      color: #f4d03f;
+      text-decoration: none;
+      font-size: clamp(0.7rem, 1vw, 1rem);
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .side-block a:hover {
+      color: #ff3333;
+      text-shadow: 0 0 10px #ff0000;
+    }
+
+    /* About section with image */
+    .about-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1 1 55%;
+    }
+
+    .about-image {
+      flex: 1 1 40%;
+      text-align: center;
+    }
+
+    .about-image img {
+      max-width: 70%;
+      border-radius: 15px;
+      border: 3px solid #f4d03f;
+      box-shadow: 0 0 20px #ff0000, 0 0 40px #ff3333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The CNC God</h1>
+    <nav>
+      <ul>
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="highlights.html">Highlights</a></li>
+        <li><a class="nav-link" data-target="About Me">About</a></li>
+        <li><a class="nav-link" href="index1.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Sticky side blocks -->
+  <div class="side-block left-side">
+    <img src="jpeg.jpg" alt="Ivar Left">
+    <a href="index3.html" target="_blank">Lightsaber courses</a>
+  </div>
+
+  <div class="side-block right-side">
+    <img src="jpeg.jpg" alt="Ivar Right">
+    <a href="index3.html" target="_blank">Lightsaber courses</a>
+  </div>
+
+  <section id="home" class="hero">
+    <h1>Welcome to the Realm of Ivar</h1>
+    <p>The Aryan CNC God — Master of Machines</p>
+    <a class="epic-btn" href="highlights.html">⚡ Enter Ivar’s Highlights ⚡</a>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="about-container">
+      <div class="about-text">
+        <p>
+          In the dark halls of Sandviken, where steel sings and machines breathe fire, 
+          one name echoes louder than the rest: <strong>Ivar Siggstedt</strong>.  
+          Born in 2006, under the Fire Dog sign, Ivar does not merely operate CNC machines—  
+          he commands them like extensions of his very soul.  
+        </p>
+        <p>
+          His skills bend metal into masterpieces, his will reshapes industries, and his legend 
+          grows with each cut of the blade. Colleagues call him <em>The CNC God</em>. 
+          Rivals whisper his name with equal parts fear and respect.  
+        </p>
+      </div>
+      <div class="about-image">
+        <img src= "Ivar.jpg" alt="Ivar the CNC God">
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p><strong>Name:</strong> Ivar Siggstedt</p>
+    <p><strong>Email:</strong> <a href="mailto:ivar.siggstedt@sandvik.com">ivar.siggstedt@sandvik.com</a></p>
+    <p><strong>Company:</strong> AB Sandvik Coromant</p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ivar-siggstedt-a36bb8263/" target="_blank">Connect</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 The CNC God. All rights reserved.</p>
+  </footer>
+</body>
+</html>
